@@ -1,8 +1,8 @@
 from mijnproject import app, db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
-from mijnproject.models import User, Acteur, Film, rol
-from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm
+from mijnproject.models import User, Acteur, Regisseur, Film, rol
+from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm, regisseurForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -27,18 +27,37 @@ def logout():
 @app.route('/acteur_toevoegen', methods=['GET', 'POST'])
 @login_required
 def acteur_toevoegen():
-    form = acteurForm()
-    if form.validate_on_submit():
+    Acteurform = acteurForm()
+    Regisseurform = regisseurForm()
+    Filmform = filmForm()
+    if Acteurform.validate_on_submit():
         # Voeg een nieuwe acteur toe aan de database
-        new_acteur = Acteur(form.voornaam.data,
-                          form.achternaam.data)
+        new_acteur = Acteur(Acteurform.voornaam.data,
+                          Acteurform.achternaam.data)
         db.session.add(new_acteur)
         db.session.commit()
         flash('De acteur is succesvol toegevoegd!')
-
         return redirect(url_for('home'))
 
-    return render_template('acteur_toevoegen.html',form=form)
+    if Regisseurform.validate_on_submit():
+        # Voeg een nieuwe acteur toe aan de database
+        new_regisseur = Regisseur(Regisseurform.voornaam.data,
+                            Regisseurform.achternaam.data)
+        db.session.add(new_regisseur)
+        db.session.commit()
+        flash('De acteur is succesvol toegevoegd!')
+        return redirect(url_for('home'))
+
+    if Filmform.validate_on_submit():
+        # Voeg een nieuwe acteur toe aan de database
+        new_film = Film(Filmform.titel.data,
+                        Filmform.datum.data)
+        db.session.add(new_film)
+        db.session.commit()
+        flash('De acteur is succesvol toegevoegd!')
+        return redirect(url_for('home'))
+
+    return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform)
 
 
 @app.route('/film_toevoegen', methods=['GET', 'POST'])

@@ -2,22 +2,40 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h1>Wil je een nieuwe acteur toevoegen??</h1>
-    <p>Vul de naam in en klik op Voeg toe:</p>
+    <h1>Hier kan je imformatie toevoegen!</h1>
 </div>
 <div class="jumbotron">
 <form method="POST">
     <ul class="list-group">
         <li class="list-group-item">
             <div class="jumbotron">
-                <h1>Heeft zich een nieuwe cursist aangemeld?</h1>
+                <h1>Wil je een nieuwe acteur toevoegen?</h1>
                 <p>Vul de naam in en klik op Voeg toe:</p>
                 <form method="POST">
-                    {{ form.hidden_tag() }}
-                    {{ form.voornaam.label }} {{ form.voornaam() }}<br>
-                    {{ form.achternaam.label }} {{ form.achternaam() }}<br>
-                    {{ form.film.label }} {{ form.film() }}<br>
-                    {{ form.submit() }}
+                    {{ Aform.hidden_tag() }}
+                    {{ Aform.voornaam.label }} {{ Aform.voornaam() }}<br>
+                    {{ Aform.achternaam.label }} {{ Aform.achternaam() }}<br>
+                    {{ Aform.submit() }}
+                </form>
+            </div>
+            <div class="jumbotron">
+                <h1>Wil je een nieuwe regisseur toevoegen?</h1>
+                <p>Vul de naam in en klik op Voeg toe:</p>
+                <form method="POST">
+                    {{ Rform.hidden_tag() }}
+                    {{ Rform.voornaam.label }} {{ Rform.voornaam() }}<br>
+                    {{ Rform.achternaam.label }} {{ Rform.achternaam() }}<br>
+                    {{ Rform.submit() }}
+                </form>
+            </div>
+            <div class="jumbotron">
+                <h1>Wil je een nieuwe film toevoegen?</h1>
+                <p>Vul de naam in en klik op Voeg toe:</p>
+                <form method="POST">
+                    {{ Fform.hidden_tag() }}
+                    {{ Fform.titel.label }} {{ Fform.titel() }}<br>
+                    {{ Fform.datum.label }} {{ Fform.datum() }}<br>
+                    {{ Fform.submit() }}
                 </form>
             </div>
         </li>

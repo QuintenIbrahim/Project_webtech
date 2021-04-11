@@ -40,12 +40,21 @@ class Acteur(db.Model):
         self.voornaam = voornaam
         self.achternaam = achternaam
 
+class Regisseur(db.Model):
+    # Maak een tabel aan in de database
+    __tablename__ = 'Regisseur'
+    id = db.Column(db.Integer, primary_key=True)
+    voornaam = db.Column(db.String(64), unique=True, index=True)
+    achternaam = db.Column(db.String(64), unique=True, index=True)
+    def __init__(self, voornaam, achternaam):
+        self.voornaam = voornaam
+        self.achternaam = achternaam
+
 class Film(db.Model):
     # Maak een tabel aan in de database
     __tablename__ = 'Film'
     id = db.Column(db.Integer, primary_key=True)
     titel = db.Column(db.String(64), unique=True, index=True)
-    acteur_id = db.Column(db.Integer, db.ForeignKey('Acteur.id'))
     datum = db.Column(db.Integer)
     rol = db.relationship('rol', backref=db.backref('Film', lazy=True))
 

@@ -38,16 +38,30 @@ class RegistrationForm(FlaskForm):
 class acteurForm(FlaskForm):
     voornaam = StringField('voornaam', validators=[DataRequired()])
     achternaam = StringField('achternaam', validators=[DataRequired()])
-    film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
+    #film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Voeg toe')
 
     def validate_voornaam(self, field):
         if Acteur.query.filter_by(voornaam=field.data).first():
-            raise ValidationError("De voornaam is al in gebruik")
+            raise ValidationError("Deze voornaam is al in gebruik")
 
     def validate_achternaam(self, field):
         if Acteur.query.filter_by(achternaam=field.data).first():
-            raise ValidationError("De ahcternaamnaam is al in gebruik")
+            raise ValidationError("Deze achternaam is al in gebruik")
+
+class regisseurForm(FlaskForm):
+    voornaam = StringField('voornaam', validators=[DataRequired()])
+    achternaam = StringField('achternaam', validators=[DataRequired()])
+    #film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
+    submit = SubmitField('Voeg toe')
+
+    def validate_voornaam(self, field):
+        if Acteur.query.filter_by(voornaam=field.data).first():
+            raise ValidationError("Deze voornaam is al in gebruik")
+
+    def validate_achternaam(self, field):
+        if Acteur.query.filter_by(achternaam=field.data).first():
+            raise ValidationError("Deze achternaam is al in gebruik")
 
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
