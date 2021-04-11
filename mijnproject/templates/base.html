@@ -21,7 +21,10 @@
             </li>
             {% if current_user.is_authenticated %}
             <li class="nav-link">
-                <a href="{{ url_for('acteur') }}">Reserveren</a>
+                <a href="{{ url_for('acteur_toevoegen') }}">Acteur Toevoegen</a>
+            </li>
+            <li class="nav-link">
+                <a href="{{ url_for('film_toevoegen') }}">Film Toevoegen</a>
             </li>
             <li class="nav-link"><a href="{{ url_for('logout') }}">Uitloggen</a></li>
             {% else %}

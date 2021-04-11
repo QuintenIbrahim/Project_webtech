@@ -1,7 +1,7 @@
 from mijnproject import app, db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
-from mijnproject.models import User, Acteur, film, rol
+from mijnproject.models import User, Acteur, Film, rol
 from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -24,21 +24,38 @@ def logout():
     flash('Je bent nu uitgelogd!')
     return redirect(url_for('home'))
 
-@app.route('/reserveren', methods=['GET', 'POST'])
+@app.route('/acteur_toevoegen', methods=['GET', 'POST'])
 @login_required
-def acteur():
+def acteur_toevoegen():
     form = acteurForm()
     if form.validate_on_submit():
-        # Voeg een nieuwe cursist toe aan de database
-        new_huis = Acteur(form.voornaam.data,
+        # Voeg een nieuwe acteur toe aan de database
+        new_acteur = Acteur(form.voornaam.data,
                           form.achternaam.data)
-        db.session.add(new_huis)
+        db.session.add(new_acteur)
         db.session.commit()
-        flash('Dank voor de registratie. Er kan nu ingelogd worden! ')
+        flash('De acteur is succesvol toegevoegd!')
 
         return redirect(url_for('home'))
 
-    return render_template('reserveren.html',form=form)
+    return render_template('acteur_toevoegen.html',form=form)
+
+
+@app.route('/film_toevoegen', methods=['GET', 'POST'])
+@login_required
+def film_toevoegen():
+    form = filmForm()
+    if form.validate_on_submit():
+        # Voeg een nieuwe film toe aan de database
+        new_film = Film(form.titel.data,
+                          form.datum.data)
+        db.session.add(new_film)
+        db.session.commit()
+        flash('De film is succesvol toegevoegd! ')
+
+        return redirect(url_for('home'))
+
+    return render_template('film_toevoegen.html', form=form)
 
 
 @app.route('/films')
