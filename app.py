@@ -37,25 +37,25 @@ def acteur_toevoegen():
         db.session.add(new_acteur)
         db.session.commit()
         flash('De acteur is succesvol toegevoegd!')
-        return redirect(url_for('home'))
+        return redirect(url_for('films'))
 
     if Regisseurform.validate_on_submit():
-        # Voeg een nieuwe acteur toe aan de database
+        # Voeg een nieuwe regisseur toe aan de database
         new_regisseur = Regisseur(Regisseurform.voornaam.data,
                             Regisseurform.achternaam.data)
         db.session.add(new_regisseur)
         db.session.commit()
-        flash('De acteur is succesvol toegevoegd!')
-        return redirect(url_for('home'))
+        flash('De regisseur is succesvol toegevoegd!')
+        return redirect(url_for('films'))
 
     if Filmform.validate_on_submit():
-        # Voeg een nieuwe acteur toe aan de database
+        # Voeg een nieuwe film toe aan de database
         new_film = Film(Filmform.titel.data,
                         Filmform.datum.data)
         db.session.add(new_film)
         db.session.commit()
-        flash('De acteur is succesvol toegevoegd!')
-        return redirect(url_for('home'))
+        flash('De film is succesvol toegevoegd!')
+        return redirect(url_for('films'))
 
     return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform)
 

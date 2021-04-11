@@ -13,8 +13,8 @@
                 <p>Vul de naam in en klik op Voeg toe:</p>
                 <form method="POST">
                     {{ Aform.hidden_tag() }}
-                    {{ Aform.voornaam.label }} {{ Aform.voornaam() }}<br>
-                    {{ Aform.achternaam.label }} {{ Aform.achternaam() }}<br>
+                    {{ Aform.voornaam.label }} <br> {{ Aform.voornaam() }}<br>
+                    {{ Aform.achternaam.label }} <br> {{ Aform.achternaam() }}<br>
                     {{ Aform.submit() }}
                 </form>
             </div>
@@ -23,18 +23,18 @@
                 <p>Vul de naam in en klik op Voeg toe:</p>
                 <form method="POST">
                     {{ Rform.hidden_tag() }}
-                    {{ Rform.voornaam.label }} {{ Rform.voornaam() }}<br>
-                    {{ Rform.achternaam.label }} {{ Rform.achternaam() }}<br>
+                    {{ Rform.voornaam.label }} <br> {{ Rform.voornaam() }}<br>
+                    {{ Rform.achternaam.label }} <br> {{ Rform.achternaam() }}<br>
                     {{ Rform.submit() }}
                 </form>
             </div>
             <div class="jumbotron">
                 <h1>Wil je een nieuwe film toevoegen?</h1>
-                <p>Vul de naam in en klik op Voeg toe:</p>
+                <p>Vul de naam en de release-datum in en klik op Voeg toe:</p>
                 <form method="POST">
                     {{ Fform.hidden_tag() }}
-                    {{ Fform.titel.label }} {{ Fform.titel() }}<br>
-                    {{ Fform.datum.label }} {{ Fform.datum() }}<br>
+                    {{ Fform.titel.label }} <br> {{ Fform.titel() }}<br>
+                    {{ Fform.datum.label }} <br> {{ Fform.datum() }}<br>
                     {{ Fform.submit() }}
                 </form>
             </div>

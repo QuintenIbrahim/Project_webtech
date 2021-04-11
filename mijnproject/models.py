@@ -55,7 +55,7 @@ class Film(db.Model):
     __tablename__ = 'Film'
     id = db.Column(db.Integer, primary_key=True)
     titel = db.Column(db.String(64), unique=True, index=True)
-    datum = db.Column(db.Integer)
+    datum = db.Column(db.Date)
     rol = db.relationship('rol', backref=db.backref('Film', lazy=True))
 
     def __init__(self, titel, datum):

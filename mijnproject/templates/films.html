@@ -2,12 +2,12 @@
 {% block content %}
 <div class="jumbotron">
     <li class="list-group-item">
-<h1>Hallo {{ current_user.username }}! Hier zijn al onze Films!</h1>
+<h1>Hallo {{ current_user.username }}! Hier zijn alle Films!</h1>
 {% if films|length %}
         {% for film in films %}
             <div class="jumbotron">
-                {{ film.titel }}
-                {{ film.datum }} </br>
+                Naam: {{ film.titel }} </br>
+                Release-datum: {{ film.datum }} </br>
             </div>
         {% endfor %}
 

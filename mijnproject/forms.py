@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from mijnproject.models import User, Acteur, Film
+from mijnproject.models import User, Acteur, Film, Regisseur
 
 
 class LoginForm(FlaskForm):
@@ -36,8 +37,8 @@ class RegistrationForm(FlaskForm):
 
 
 class acteurForm(FlaskForm):
-    voornaam = StringField('voornaam', validators=[DataRequired()])
-    achternaam = StringField('achternaam', validators=[DataRequired()])
+    voornaam = StringField('Voornaam', validators=[DataRequired()])
+    achternaam = StringField('Achternaam', validators=[DataRequired()])
     #film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Voeg toe')
 
@@ -50,24 +51,24 @@ class acteurForm(FlaskForm):
             raise ValidationError("Deze achternaam is al in gebruik")
 
 class regisseurForm(FlaskForm):
-    voornaam = StringField('voornaam', validators=[DataRequired()])
-    achternaam = StringField('achternaam', validators=[DataRequired()])
+    voornaam = StringField('Voornaam', validators=[DataRequired()])
+    achternaam = StringField('Achternaam', validators=[DataRequired()])
     #film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Voeg toe')
 
     def validate_voornaam(self, field):
-        if Acteur.query.filter_by(voornaam=field.data).first():
+        if Regisseur.query.filter_by(voornaam=field.data).first():
             raise ValidationError("Deze voornaam is al in gebruik")
 
     def validate_achternaam(self, field):
-        if Acteur.query.filter_by(achternaam=field.data).first():
+        if Regisseur.query.filter_by(achternaam=field.data).first():
             raise ValidationError("Deze achternaam is al in gebruik")
 
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
-    datum = IntegerField('Datum', validators=[DataRequired()])
+    datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
     submit = SubmitField('Voeg toe')
 
     def validate_titel(self, field):
         if Film.query.filter_by(titel=field.data).first():
-            raise ValidationError("De titel is al in gebruik")
+            raise ValidationError("Deze titel is al in gebruik")
