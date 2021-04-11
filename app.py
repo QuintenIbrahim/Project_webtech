@@ -53,15 +53,15 @@ def film_toevoegen():
         db.session.commit()
         flash('De film is succesvol toegevoegd! ')
 
-        return redirect(url_for('home'))
+        return redirect(url_for('films'))
 
     return render_template('film_toevoegen.html', form=form)
 
 
 @app.route('/films')
 def films():
-    acteurs = Acteur.query.all()
-    return render_template('films.html', acteurs=acteurs)
+    films = Film.query.all()
+    return render_template('films.html', films=films)
 
 
 @app.route('/login', methods=['GET', 'POST'])

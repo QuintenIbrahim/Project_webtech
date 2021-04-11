@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.email.label }}
-    {{ form.email() }}
-    {% for err in form.email.errors %}{{ err }}{% endfor %}<br>
-    {{ form.password.label }}
-    {{ form.password() }}
-    {% for err in form.password.errors %}{{ err }}{% endfor %}<br>
-    {{ form.submit() }}
-</form>
+<div class="jumbotron">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.email.label }}
+        {{ form.email() }}
+        {% for err in form.email.errors %}{{ err }}{% endfor %}<br>
+        {{ form.password.label }}
+        {{ form.password() }}
+        {% for err in form.password.errors %}{{ err }}{% endfor %}<br>
+        {{ form.submit() }}
+    </form>
+</div>
 {% endblock %}

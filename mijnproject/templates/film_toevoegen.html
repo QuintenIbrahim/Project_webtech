@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-
-<p>Hallo {{ current_user.username }}! Hier zijn al onze huisjes</p>
+<div class="jumbotron">
+    <h1>Wil je een nieuwe film toevoegen??</h1>
+    <p>Vul de naam in en klik op Voeg toe:</p>
+</div>
 <div class="jumbotron">
 <form method="POST">
     <ul class="list-group">
@@ -15,21 +17,6 @@
                     {{ form.datum.label }} {{ form.datum() }}<br>
                     {{ form.submit() }}
                 </form>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="jumbotron">
-                Alle info van huisje 2<br>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="jumbotron">
-                Alle info van huisje 3<br>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="jumbotron">
-                Alle info van huisje 4<br>
             </div>
         </li>
     </ul>

@@ -40,8 +40,19 @@ class acteurForm(FlaskForm):
     achternaam = StringField('achternaam', validators=[DataRequired()])
     submit = SubmitField('Voeg toe')
 
+    def validate_voornaam(self, field):
+        if Acteur.query.filter_by(voornaam=field.data).first():
+            raise ValidationError("De voornaam is al in gebruik")
+
+    def validate_achternaam(self, field):
+        if Acteur.query.filter_by(achternaam=field.data).first():
+            raise ValidationError("De ahcternaamnaam is al in gebruik")
+
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
     datum = IntegerField('Datum', validators=[DataRequired()])
     submit = SubmitField('Voeg toe')
 
+    def validate_titel(self, field):
+        if Film.query.filter_by(titel=field.data).first():
+            raise ValidationError("De titel is al in gebruik")
