@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from mijnproject.models import User, Acteur, Film
 
@@ -38,6 +38,7 @@ class RegistrationForm(FlaskForm):
 class acteurForm(FlaskForm):
     voornaam = StringField('voornaam', validators=[DataRequired()])
     achternaam = StringField('achternaam', validators=[DataRequired()])
+    film = SelectField(label='Film', choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')])
     submit = SubmitField('Voeg toe')
 
     def validate_voornaam(self, field):

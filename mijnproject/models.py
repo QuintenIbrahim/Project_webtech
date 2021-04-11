@@ -48,6 +48,7 @@ class Film(db.Model):
     acteur_id = db.Column(db.Integer, db.ForeignKey('Acteur.id'))
     datum = db.Column(db.Integer)
     rol = db.relationship('rol', backref=db.backref('Film', lazy=True))
+
     def __init__(self, titel, datum):
         self.titel = titel
         self.datum = datum
@@ -58,7 +59,6 @@ class rol(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     film_id = db.Column(db.Integer, db.ForeignKey('Film.id'))
     acteur_id = db.Column(db.Integer, db.ForeignKey('Acteur.id'))
-    acteur_voornaam = db.Column(db.String(64), db.ForeignKey('Acteur.voornaam'))
 
 
 
