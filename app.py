@@ -51,7 +51,8 @@ def acteur_toevoegen():
     if Filmform.validate_on_submit():
         # Voeg een nieuwe film toe aan de database
         new_film = Film(Filmform.titel.data,
-                        Filmform.datum.data)
+                        Filmform.datum.data,
+                        Filmform.rating.data)
         db.session.add(new_film)
         db.session.commit()
         flash('De film is succesvol toegevoegd!')
