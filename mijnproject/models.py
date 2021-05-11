@@ -36,6 +36,7 @@ class Acteur(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     voornaam = db.Column(db.String(64), unique=True, index=True)
     achternaam = db.Column(db.String(64), unique=True, index=True)
+    rol = db.relationship('rol', backref=db.backref('acteur', lazy=True))
     def __init__(self, voornaam, achternaam):
         self.voornaam = voornaam
         self.achternaam = achternaam
@@ -54,11 +55,11 @@ class Film(db.Model):
     # Maak een tabel aan in de database
     __tablename__ = 'Film'
     id = db.Column(db.Integer, primary_key=True)
-    titel = db.Column(db.String(64), unique=True, index=True)
+    titel = db.Column(db.String(64), index=True)
     datum = db.Column(db.Date)
     rating = db.Column(db.Integer)
     citaten = db.Column(db.String, index=True)
-    rol = db.relationship('rol', backref=db.backref('Film', lazy=True))
+    rol = db.relationship('rol', backref=db.backref('film', lazy=True))
 
     def __init__(self, titel, datum, rating, citaten):
         self.titel = titel
