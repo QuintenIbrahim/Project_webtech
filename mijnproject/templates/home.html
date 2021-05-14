@@ -3,36 +3,45 @@
 <div class="jumbotron">
     {% if current_user.is_authenticated %}
     <h1>Hallo {{ current_user.username }}! Dit zijn een paar films van onze website!</h1>
-    <li class="list-group-item">
-        <div class="jumbotron">
-            <embed src="https://www.youtube.com/embed/F9Bo89m2f6g" allowfullscreen="true" width="425" height="344">
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="jumbotron">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/nW948Va-l10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </li>
-    <li class="list-group-item">
-        <div class="jumbotron">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/ojGHE581lsM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-    </li>
+    {% if films|length %}
+        {% for film in films %}
+                Naam: {{ film.titel }} </br>
+                Release-datum: {{ film.datum }} </br>
+                {% if film.rating > 8 %}
+                Rating: {{ film.rating }} </br>
+                {% else %}
+                <p>Er zijn geen films met een hoge rating</p>
+                {% endif %}
+
+        {% endfor %}
 
     {% else %}
-    <h1>Heb je veel intresse in films bij ons kun je terecht!</h1>
-    <p>Hier zijn al films waar je misschien intresse in hebt</p>
-    <li class="list-group-item">
-        <div class="jumbotron">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/-FZ-pPFAjYY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div>
+            <p>Er zijn nog geen films geplaatst.</p>
         </div>
-    </li>
-    <li class="list-group-item">
-        <div class="jumbotron">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/WjBjUF4Tb_k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    {% endif %}
+
+    {% else %}
+    {% if films|length %}
+        {% for film in films %}
+
+                {% if film.rating >= 8 %}
+                Naam: {{ film.titel }} </br>
+                Release-datum: {{ film.datum }} </br>
+                Rating: {{ film.rating }} </br>
+                </br>
+                {% else %}
+
+                {% endif %}
+
+        {% endfor %}
+
+
+    {% else %}
+        <div>
+            <p>Er zijn nog geen films geplaatst.</p>
         </div>
-    </li>
-    <h2>Om te kunnen beginnen log in of registreer!</h2>
+    {% endif %}
     {% endif %}
 </div>
 
