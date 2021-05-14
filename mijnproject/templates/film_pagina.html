@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <li class="list-group-item">
+<h1>Hallo {{ current_user.username }}! Hier zijn alle Films!</h1>
+{% if films|length %}
+        {% for film in films %}
+            <div class="jumbotron">
+                Naam: {{ film.titel }} </br>
+                Release-datum: {{ film.datum }} </br>
+            </div>
+        {% endfor %}
+
+{% else %}
+    <div>
+        <p>Er zijn nog geen films geplaatst.</p>
+    </div>
+{% endif %}
+    </li>
+</div>
