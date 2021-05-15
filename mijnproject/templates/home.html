@@ -7,7 +7,7 @@
         {% for film in films %}
                 Naam: {{ film.titel }} </br>
                 Release-datum: {{ film.datum }} </br>
-                {% if film.rating > 8 %}
+                {% if film.rating >= 8 %}
                 Rating: {{ film.rating }} </br>
                 {% else %}
                 <p>Er zijn geen films met een hoge rating</p>
