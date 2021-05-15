@@ -84,6 +84,12 @@ def films():
     return render_template('films.html', films=films)
 
 
+@app.route('/film_pagina')
+def film_pagina():
+    film = Film.query.all()
+    return render_template('film_pagina.html', film=film)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -128,6 +134,8 @@ def register():
         flash('Dank voor de registratie. Er kan nu ingelogd worden! ')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+
 
 
 if __name__ == '__main__':

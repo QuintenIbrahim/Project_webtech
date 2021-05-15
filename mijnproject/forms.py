@@ -67,7 +67,7 @@ class regisseurForm(FlaskForm):
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
     datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
-    rating = IntegerField('Rating', validators=[DataRequired()])
+    rating = SelectField('Rating', choices=(range(1, 11)))
     submit = SubmitField('Voeg toe')
 
     def validate_titel(self, field):
