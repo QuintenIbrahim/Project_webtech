@@ -6,7 +6,7 @@
 {% if films|length %}
         {% for film in films %}
             <div class="jumbotron">
-                Naam: {{ film.titel }} </br>
+                Naam: <a href="{{ url_for('film_pagina') }}">{{ film.titel }}</a></br>
                 Release-datum: {{ film.datum }} </br>
             </div>
         {% endfor %}
