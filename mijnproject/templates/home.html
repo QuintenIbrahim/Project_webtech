@@ -5,9 +5,9 @@
     <h1>Hallo {{ current_user.username }}! Dit zijn een paar films van onze website!</h1>
     {% if films|length %}
         {% for film in films %}
+                {% if film.rating >= 8 %}
                 Naam: {{ film.titel }} </br>
                 Release-datum: {{ film.datum }} </br>
-                {% if film.rating >= 8 %}
                 Rating: {{ film.rating }} </br>
                 {% else %}
                 <p>Er zijn geen films met een hoge rating</p>
