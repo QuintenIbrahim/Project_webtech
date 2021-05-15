@@ -59,13 +59,15 @@ class Film(db.Model):
     datum = db.Column(db.Date)
     rating = db.Column(db.Integer)
     citaten = db.Column(db.String, index=True)
+    img = db.Column(db.LargeBinary)
     rol = db.relationship('rol', backref=db.backref('film', lazy=True))
 
-    def __init__(self, titel, datum, rating, citaten):
+    def __init__(self, titel, datum, rating, citaten, img):
         self.titel = titel
         self.datum = datum
         self.rating = rating
         self.citaten = citaten
+        self.img = img
 
 
 

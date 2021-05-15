@@ -54,30 +54,15 @@ def acteur_toevoegen():
         # Voeg een nieuwe film toe aan de database
         new_film = Film(Filmform.titel.data,
                         Filmform.datum.data,
-                        Filmform.rating.data)
+                        Filmform.rating.data,
+                        Filmform.citaten.data,
+                        Filmform.img.data)
         db.session.add(new_film)
         db.session.commit()
         flash('De film is succesvol toegevoegd!')
         return redirect(url_for('films'))
 
-    return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform)
-
-
-@app.route('/film_toevoegen', methods=['GET', 'POST'])
-@login_required
-def film_toevoegen():
-    form = filmForm()
-    if form.validate_on_submit():
-        # Voeg een nieuwe film toe aan de database
-        new_film = Film(form.titel.data,
-                          form.datum.data)
-        db.session.add(new_film)
-        db.session.commit()
-        flash('De film is succesvol toegevoegd! ')
-
-        return redirect(url_for('films'))
-
-    return render_template('film_toevoegen.html', form=form)
+    return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform, data=Filmform)
 
 
 @app.route('/films')
