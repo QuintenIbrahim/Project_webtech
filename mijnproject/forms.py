@@ -67,7 +67,7 @@ class regisseurForm(FlaskForm):
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
     datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
-    rating = IntegerField('Rating', validators=[DataRequired()])
+
     citaten = StringField('Citaten', validators=[DataRequired()])
     img = FileField('Image')
     submit = SubmitField('Voeg toe')
