@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
-    <p>Welkom je bent nu officieel een fan van de film club, ga naar home om de leukste films van nu te zien!</p>
+    <li class="list-group-item">
+        <div class="jumbotron">
+            <p>Welkom je bent nu officieel een fan van de film club, click op home om de leukste films met een rating boven de 8 van nu te zien!</p>
+            <font size="+20">
+                <a href="{{ url_for('home') }}" >Home</a>
+            </font>
+        </div>
+    </li>
 </div>
 {% endblock %}

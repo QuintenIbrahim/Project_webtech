@@ -1,7 +1,7 @@
 import base64
 
 from mijnproject import app, db
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, login_required, logout_user
 from mijnproject.models import User, Acteur, Regisseur, Film, rol
 from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm, regisseurForm
@@ -78,7 +78,7 @@ def films():
     films = Film.query.all()
     file_data = Film.query.filter_by().first()
     image = base64.b64encode(file_data.img).decode('ascii')
-    return render_template('films.html', films=films, data=list,image=image)
+    return render_template('films.html', films=films, data=list, image=image)
 
 
 @app.route('/film_pagina')

@@ -7,7 +7,7 @@
 {% if films|length %}
         {% for film in films %}
             <div class="jumbotron">
-                Naam: <a href="{{ url_for('film_pagina') }}">{{ film.titel }}</a></br>
+                Naam: <a href="{{ url_for('film_pagina') }}">{{ film.titel }}</a><a href="/update{{film.titel}}" class="btn btn-outline-secondary btn-sm">Update</a></br>
                 Release-datum: {{ film.datum }} </br>
                 Rating: {{ film.rating}}</br>
                 <img src="data:;base64,{{ image }}" style="width:50%;height:50%"/>
@@ -26,11 +26,10 @@
             <div class="jumbotron">
                 Naam: <a href="{{ url_for('film_pagina') }}">{{ film.titel }}</a></br>
                 Release-datum: {{ film.datum }} </br>
-                Rating: {{ film.rating}}
-                <img src="data:;base64,{{ image }}" style="width:50%;height:50%"/>
+                Rating: {{ film.rating}}</br>
+                <img src="data:;base64,{{ image }}" style="width:50%;height:50%"/>'
             </div>
         {% endfor %}
-
     {% else %}
         <div>
             <p>Er zijn nog geen films geplaatst.</p>
