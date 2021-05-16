@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <li class="list-group-item">
+        <h1>Hallo {{ current_user.username }}! Hier zijn alle Films!</h1>
+        {% for Film in films %}
+            {{ Film.titel }}
+        {% endfor %}
+    </li>
+</div>
+
+{% endblock %}
