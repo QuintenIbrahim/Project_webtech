@@ -1,21 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 75%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
 <div class="jumbotron">
     <li class="list-group-item">
-<h1>(film)</h1>
-{% if film|length %}
         {% for Film in film %}
+            <h1>{{ Film.titel }}</h1></a></br>
             <div class="jumbotron">
-                Naam: {{ Film.titel }} </br>
-                Release-datum: {{ Film.datum }} </br>
+                <h3>Film informatie:</h3>
+                Release-Datum: {{ Film.datum }}<br>
+                Rating: {{ Film.rating }}<br>
+                <a href="film_wijzigen?filmId={{ Film.id }}">
+                    <input type="button" value="Wijzigen" />
+                </a>
             </div>
         {% endfor %}
+<!--    Maken tabel citaten:   -->
+        {% if citaat|length %}
+            <div class="jumbotron">
+            <h3> Citaten: </h3>
+            <table>
+            <tr>
+                <th>User</th>
+                <th>Datum</th>
+                <th>Citaat</th>
+            </tr>
 
-{% else %}
-    <div>
-        <p>Er zijn nog geen films geplaatst.</p>
-    </div>
-{% endif %}
+            {% for Citaat in citaat %}
+                <tr>
+                    <td>{{ Citaat.user }}</td>
+                    <td>{{ Citaat.datum }}</td>
+                    <td>{{ Citaat.citaten }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            </div>
+        {% endif %}
+
+<!--    Form Citaten opgeven:   -->
+        <div class="jumbotron">
+            <h1>Voeg uw eigen citaat toe!</h1>
+            <form method="POST">
+                {{ Cform.hidden_tag() }}
+                {{ Cform.citaten() }}<br>
+                {{ Cform.submit() }}
+            </form>
+        </div>
+
     </li>
 </div>
 

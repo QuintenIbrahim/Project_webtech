@@ -1,8 +1,9 @@
 from mijnproject import app, db
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, login_required, logout_user
-from mijnproject.models import User, Acteur, Regisseur, Film, rol
-from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm, regisseurForm
+from flask_login import login_user, login_required, logout_user, current_user
+from mijnproject.models import User, Acteur, Regisseur, Film, rol, Citaten
+from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm, regisseurForm, CitaatForm
+from datetime import date
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -54,8 +55,7 @@ def acteur_toevoegen():
         # Voeg een nieuwe film toe aan de database
         new_film = Film(Filmform.titel.data,
                         Filmform.datum.data,
-                        Filmform.rating.data,
-                        Filmform.citaten.data)
+                        Filmform.rating.data)
         db.session.add(new_film)
         db.session.commit()
         flash('De film is succesvol toegevoegd!')
@@ -70,35 +70,40 @@ def films():
     return render_template('films.html', films=films)
 
 
-@app.route('/film_pagina')
+@app.route('/film_pagina', methods=['GET', 'POST'])
+@login_required
 def film_pagina():
-    film = Film.query.all()
-    return render_template('film_pagina.html', film=film)
+    id = request.args.get("filmId")
+    citaatForm = CitaatForm()
+    if citaatForm.validate_on_submit():
+        # Voeg een nieuwe citaat toe aan de database
+        new_citaat = Citaten(current_user.username, date.today(), citaatForm.citaten.data, id)
+        db.session.add(new_citaat)
+        db.session.commit()
+        flash('Uw citaat is succesvol toegevoegd!')
+        return redirect('film_pagina?filmId='+id)
+    film = Film.query.filter(Film.id == id).all()
+    citaat = Citaten.query.filter(Citaten.film_id == id).order_by(Citaten.datum.desc()).all()
+    return render_template('film_pagina.html', Cform=citaatForm, film=film, citaat=citaat)
+
+@app.route('/film_wijzigen')
+def film_wijzigen():
+    id = request.args.get("filmId")
+    films = Film.query.filter(Film.id == id).all()
+    return render_template('film_wijzigen.html', films=films)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # Grab the user from our User Models table
         user = User.query.filter_by(email=form.email.data).first()
 
-        # Check that the user was supplied and the password is right
-        # The verify_password method comes from the User object
-        # https://stackoverflow.com/questions/2209755/python-operation-vs-is-not
-
         if user.check_password(form.password.data) and user is not None:
-            # Log in the user
 
             login_user(user)
             flash('Logged in successfully.')
-
-            # If a user was trying to visit a page that requires a login
-            # flask saves that URL as 'next'.
             next = request.args.get('next')
-
-            # So let's now check if that next exists, otherwise we'll go to
-            # the welcome page.
             if next == None or not next[0] == '/':
                 next = url_for('welkom')
 

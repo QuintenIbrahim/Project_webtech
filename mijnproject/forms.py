@@ -68,10 +68,13 @@ class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
     datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
     rating = SelectField('Rating', choices=(range(1, 11)))
-    citaten = StringField('citaten', validators=[DataRequired()])
     #img = FileField('img')
     submit = SubmitField('Voeg toe')
 
     def validate_titel(self, field):
         if Film.query.filter_by(titel=field.data).first():
             raise ValidationError("Deze titel is al in gebruik")
+
+class CitaatForm(FlaskForm):
+    citaten = StringField('citaten')
+    submit = SubmitField('Voeg toe')

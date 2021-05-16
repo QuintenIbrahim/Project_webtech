@@ -58,15 +58,28 @@ class Film(db.Model):
     titel = db.Column(db.String(64), index=True)
     datum = db.Column(db.Date)
     rating = db.Column(db.Integer)
-    citaten = db.Column(db.String, index=True)
     #img = db.Column(db.LargeBinary)
     rol = db.relationship('rol', backref=db.backref('film', lazy=True))
 
-    def __init__(self, titel, datum, rating, citaten):
+    def __init__(self, titel, datum, rating):
         self.titel = titel
         self.datum = datum
         self.rating = rating
+
+class Citaten(db.Model):
+    # Maak een tabel aan in de database
+    __tablename__ = 'Citaten'
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(64))
+    datum = db.Column(db.Date)
+    citaten = db.Column(db.String(80), index=True)
+    film_id = db.Column(db.Integer, db.ForeignKey('Film.id'))
+
+    def __init__(self, user, datum, citaten, film_id):
+        self.user = user
+        self.datum = datum
         self.citaten = citaten
+        self.film_id = film_id
 
 
 class rol(db.Model):
