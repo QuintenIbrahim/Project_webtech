@@ -80,6 +80,9 @@ def films():
     image = base64.b64encode(file_data.img).decode('ascii')
     return render_template('films.html', films=films, data=list, image=image)
 
+@app.route('/update/<int:id>', methods=['POST','GET'])
+def update(id):
+    return
 
 @app.route('/film_pagina')
 def film_pagina():
