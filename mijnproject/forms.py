@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, FileField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, FileField
 from wtforms.fields.html5 import DateField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 from mijnproject.models import User, Acteur, Film, Regisseur
@@ -67,9 +67,9 @@ class regisseurForm(FlaskForm):
 class filmForm(FlaskForm):
     titel = StringField('Titel', validators=[DataRequired()])
     datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
-
-    citaten = StringField('Citaten', validators=[DataRequired()])
-    img = FileField('Image')
+    rating = SelectField('Rating', choices=(range(1, 11)))
+    citaten = StringField('citaten', validators=[DataRequired()])
+    img = FileField('img', validators=[DataRequired()])
     submit = SubmitField('Voeg toe')
 
     def validate_titel(self, field):

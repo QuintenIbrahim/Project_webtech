@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+    <li class="list-group-item">
+<h1>(film)</h1>
+{% if film|length %}
+        {% for Film in film %}
+            <div class="jumbotron">
+                Naam: {{ Film.titel }} </br>
+                Release-datum: {{ Film.datum }} </br>
+            </div>
+        {% endfor %}
+
+{% else %}
+    <div>
+        <p>Er zijn nog geen films geplaatst.</p>
+    </div>
+{% endif %}
+    </li>
+</div>
+
+{% endblock %}

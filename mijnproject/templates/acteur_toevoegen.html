@@ -31,14 +31,13 @@
             <div class="jumbotron">
                 <h1>Wil je een nieuwe film toevoegen?</h1>
                 <p>Vul de naam en de release-datum in en klik op Voeg toe:</p>
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     {{ Fform.hidden_tag() }}
                     {{ Fform.titel.label }} <br> {{ Fform.titel() }}<br>
                     {{ Fform.datum.label }} <br> {{ Fform.datum() }}<br>
                     {{ Fform.rating.label }} <br> {{ Fform.rating() }}<br>
                     {{ Fform.citaten.label }} <br> {{ Fform.citaten() }}<br>
                     {{ Fform.img.label }} <br> {{ Fform.img() }}<br>
-
                     {{ Fform.submit() }}
                 </form>
             </div>
