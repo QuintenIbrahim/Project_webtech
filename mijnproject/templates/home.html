@@ -1,48 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="jumbotron">
+    <li class="list-group-item">
     {% if current_user.is_authenticated %}
-    <h1>Hallo {{ current_user.username }}! Dit zijn een paar films van onze website!</h1>
-    {% if films|length %}
-        {% for film in films %}
-                {% if film.rating >= 8 %}
-                Naam: {{ film.titel }} </br>
-                Release-datum: {{ film.datum }} </br>
-                Rating: {{ film.rating }} </br>
+        <h1>Hallo {{ current_user.username }}! Dit zijn een paar films van onze website!</h1>
+            <div class="jumbotron">
+                {% if films|length %}
+                    {% for film in films %}
+                        {% if film.rating >= 8 %}
+                            Naam: {{ film.titel }} </br>
+                            Release-datum: {{ film.datum }} </br>
+                            Rating: {{ film.rating }} </br>
+                            <img src="data:;base64,{{ image }}" style="width:50%;height:50%"/></br>
+                            </br>
+                        {% endif %}
+                    {% endfor %}
                 {% else %}
-                <p>Er zijn geen films met een hoge rating</p>
+                    <div>
+                        <p>Er zijn geen films met een hoge rating.</p>
+                    </div>
                 {% endif %}
-
-        {% endfor %}
-
+            </div>
     {% else %}
-        <div>
-            <p>Er zijn nog geen films geplaatst.</p>
+        <h1>Welkom op de filmfan pagina, Hier zit u de films met de beste rating!</h1>
+        <div class="jumbotron">
+            {% if films|length %}
+                {% for film in films %}
+                    {% if film.rating >= 8 %}
+                        Naam: {{ film.titel }} </br>
+                        Release-datum: {{ film.datum }} </br>
+                        Rating: {{ film.rating }} </br>
+                        <img src="data:;base64,{{ image }}" style="width:50%;height:50%"/></br>
+                        </br>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div>
+                    <p>Er zijn nog geen films geplaatst.</p>
+                </div>
+            {% endif %}
         </div>
+
     {% endif %}
-
-    {% else %}
-    {% if films|length %}
-        {% for film in films %}
-
-                {% if film.rating >= 8 %}
-                Naam: {{ film.titel }} </br>
-                Release-datum: {{ film.datum }} </br>
-                Rating: {{ film.rating }} </br>
-                </br>
-                {% else %}
-
-                {% endif %}
-
-        {% endfor %}
-
-
-    {% else %}
-        <div>
-            <p>Er zijn nog geen films geplaatst.</p>
-        </div>
-    {% endif %}
-    {% endif %}
+    </li>
 </div>
 
 {% endblock %}

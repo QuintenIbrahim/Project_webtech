@@ -69,7 +69,7 @@ class filmForm(FlaskForm):
     datum = DateField('Datum', validators=[DataRequired()], format='%Y-%m-%d')
     rating = SelectField('Rating', choices=(range(1, 11)))
     citaten = StringField('citaten', validators=[DataRequired()])
-    #img = FileField('img')
+    img = FileField('img', validators=[DataRequired()])
     submit = SubmitField('Voeg toe')
 
     def validate_titel(self, field):

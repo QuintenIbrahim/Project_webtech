@@ -1,15 +1,20 @@
+import base64
+
 from mijnproject import app, db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
 from mijnproject.models import User, Acteur, Regisseur, Film, rol
 from mijnproject.forms import LoginForm, RegistrationForm, acteurForm, filmForm, regisseurForm
+from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @app.route('/')
 def home():
     films = Film.query.all()
-    return render_template('home.html', films=films)
+    film = Film.query.filter_by().first()
+    image = base64.b64encode(film.img).decode('ascii')
+    return render_template('home.html', films=films, data=list, image=image)
 
 
 
@@ -52,22 +57,28 @@ def acteur_toevoegen():
 
     if Filmform.validate_on_submit():
         # Voeg een nieuwe film toe aan de database
+        img = request.files['img']
+        filename = secure_filename(img.filename)
         new_film = Film(Filmform.titel.data,
                         Filmform.datum.data,
                         Filmform.rating.data,
-                        Filmform.citaten.data)
+                        Filmform.citaten.data,
+                        img=img.read(),
+                        name=filename)
         db.session.add(new_film)
         db.session.commit()
         flash('De film is succesvol toegevoegd!')
         return redirect(url_for('films'))
 
-    return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform, data=Filmform)
+    return render_template('acteur_toevoegen.html', Aform=Acteurform, Rform=Regisseurform, Fform=Filmform)
 
 
 @app.route('/films')
 def films():
     films = Film.query.all()
-    return render_template('films.html', films=films)
+    file_data = Film.query.filter_by().first()
+    image = base64.b64encode(file_data.img).decode('ascii')
+    return render_template('films.html', films=films, data=list,image=image)
 
 
 @app.route('/film_pagina')
